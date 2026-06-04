@@ -43,7 +43,7 @@ class Wyckoff:
             be specified.
         letter : str or None, optional
             A string containing a single character identifying the Wyckoff position of
-            a space group as in the International Tables for Crystallograpy. If
+            a space group as in the International Tables for Crystallography. If
             ``None``, the Wyckoff position must be identified through other parameters.
             If not None, ``spacegroup`` must also be specified.
         name : str or None, optional
