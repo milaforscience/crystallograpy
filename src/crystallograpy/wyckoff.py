@@ -1,10 +1,11 @@
 from cyrstallograpy import wyckoff
 
+
 class Wyckoff:
     """Class to represent a unique Wyckoff position.
 
     An instance of this Wyckoff class is meant to represent one of the Wyckoff
-    positions stored in ``yaml/wyckoff.yaml``. 
+    positions stored in ``yaml/wyckoff.yaml``.
 
     For example, the Wyckoff position with index 1 corresponds to the Wyckoff position
     a in space group 1, which is unique to space group 1 and corresponds to coordinates
@@ -12,8 +13,8 @@ class Wyckoff:
     2 by the letter a, in space group 10 by the letter a, and in a number of other
     space groups. It corresponds to coordinates (0, 0, 0).
 
-    A Wyckoff position can be identified in the following three ways: 
-    - By its unique index as stored in ``yaml/wyckoff.yaml``, for example, 2. 
+    A Wyckoff position can be identified in the following three ways:
+    - By its unique index as stored in ``yaml/wyckoff.yaml``, for example, 2.
     - By a tuple of space group number and letter, as indicated in the International
       Tables for Crystallography, for example, (2, a) or (10, a).
     - By a string name containing the space group number and the letter, for example
@@ -22,10 +23,10 @@ class Wyckoff:
 
     def __init__(
         self,
-        index: int | None=None,
-        spacegroup: int | None=None,
-        letter: str | None=None,
-        name: str | None=None,
+        index: int | None = None,
+        spacegroup: int | None = None,
+        letter: str | None = None,
+        name: str | None = None,
     ):
         """Initialize a Wyckoff instance.
 
