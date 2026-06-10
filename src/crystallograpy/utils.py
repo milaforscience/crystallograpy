@@ -1,4 +1,5 @@
 import re
+import warnings
 from pathlib import Path
 
 import yaml
@@ -61,28 +62,50 @@ def get_wyckoff_index(
     """
     if spacegroup is not None:
         if letter is None:
-            raise ValueError(
+            warnings.warn(
                 f"A space group number ({spacegroup}) was provided but the parameter "
                 "letter is None."
             )
+            return None
         if spacegroup < 1 or spacegroup > 230:
-            raise ValueError(
+            warnings.warn(
                 f"The space group number must be between 1 and 230. {spacegroup} was "
                 "received, which is invalid."
             )
+            return None
     else:
         if letter is not None:
-            raise ValueError(
+            warnings.warn(
                 f"A Wyckoff letter ({letter}) was provided but the parameter "
                 "spacegroup is None."
             )
+            return None
     if name is not None:
         match = re.match(r"^(\d+)([a-zA-Z])$", name)
         if match:
             spacegroup_name, letter_name = int(match.group(1)), match.group(2)
         else:
-            raise ValueError(
+            warnings.warn(
                 f"A Wyckoff name was provided ({name}) but the space group and the "
                 "letter could not be successfully retrieved. The format should be an "
                 "integer followed by a letter, such as 1a, 2i, 82f, 225k, etc."
             )
+            return None
+        if spacegroup is not None and spacegroup != spacegroup_name:
+            warnings.warn(
+                f"A spacegroup parameter ({spacegroup}) and a name parameter "
+                f"({name}) have been provided by they do not coincide. None will be "
+                "returned."
+            )
+            return None
+        if letter is not None and letter != letter_name:
+            warnings.warn(
+                f"A letter parameter ({letter}) and a name parameter ({name}) "
+                "have been provided by they do not coincide. None will be returned."
+            )
+            return None
+        spacegroup = spacegroup_name
+        letter = letter_name
+
+    spacegroups = load_database("spacegroups.yaml")
+    spacegroup_data = spacegroups[spacegroup]
