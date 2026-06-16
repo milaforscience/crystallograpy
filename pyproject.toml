@@ -14,7 +14,7 @@ classifiers = [
 dependencies = [
     "PyYAML >=6.0.1",
 ]
-license = "Hippocratic-3.0-core"
+license = "Hippocratic-2.1"
 license-files = ["LICEN[CS]E*"]
 
 [project.urls]
